@@ -1,0 +1,178 @@
+.header-logo{
+  position: absolute;
+  top:2px;
+  left:5px;
+}
+
+.logo{
+  color:rgb(113, 139, 0);
+  font-size:28px;
+  font-weight: bold;
+  margin:8px;
+}
+
+.header-nav {
+  position: absolute;
+  top:2px;
+  right:5px;
+}
+.newsLogo {
+    background-image: url("/assets/img/news-background.jpg");
+    height: 100px;
+    padding: 1%;
+ 
+}
+
+body{
+    background-color: #fff;
+    text-align: left;
+    font-family: 'Source Sans Pro', Helvetica;
+  }
+  
+  #container{
+    margin: 100px auto;
+    width: 90%;
+    text-align: left;
+    position: relative;
+}
+
+
+.hide-on-med-and-down li{
+
+    display:inline-block;
+    font-size:24px;
+    padding:5px;
+  }
+  
+  .title{
+    float: left;
+  }
+  
+  
+  
+  h1{
+    color:#4aaaa5;
+    font-size:36px;
+    font-weight: bold;
+    margin:10px,10px,5px,0px;
+    text-align: center;
+  }
+
+  h2{
+    color:orange;
+    font-size:28px;
+    text-align: center;
+  }
+  
+  h4{
+    margin-top:10px;
+    margin-bottom:10px;
+    color:purple;
+    font-size:36px;
+    font-weight: bold;
+  }
+  
+  .hide-on-med-and-down li{
+    font-size:28px;
+    margin:3px;
+    align-content: left;
+  }
+  .sidenav{
+    background-color:rgb(135, 137, 250);
+    font-size:30px;
+    padding:20px;
+    
+  }  
+  
+  /* .chip{
+    font-size:32px;
+  }
+  
+  .chip ,.sidenav li{  
+    padding:5px;
+    margin-left:50px;
+  } */
+
+  
+span{
+    font-size:24px;
+    color:indigo;
+    margin:5px;
+  }
+  
+  
+  
+   
+  /* .row, 
+  .row> .column
+  {
+       padding:4px 8px;
+  }
+   */
+  .footer{
+  
+    clear: both;
+    background:#4aaaa5;
+  
+    width: 100%;
+  
+  }
+  
+.copyright{
+    background:grey;
+    color:white;
+    height:30px;
+    position:relative;
+    top:10px;
+    text-align:center;
+    width:100%;
+    margin-left:0;
+    margin-right:0;
+  }
+  
+.card-header{
+   background: gray;
+   /* font-weight: bold; */
+   font-size: 22px;
+   color: purple;
+}
+  
+.cardTitle {
+  font-size  : 18px;
+}
+
+.card-body {
+  background : lightgray;
+}
+  
+.button {
+  padding: 10px 15px;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color:white;
+  background-color: rgb(74, 100, 218);
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 6px #999;
+}
+
+.button:hover {
+  background-color: #3e8e41;
+  color:orange;
+}
+
+.button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+  
+.btnGroup button {
+  margin: 10px;
+}
+
+.btnGroup {
+  float:right;
+}

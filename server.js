@@ -10,6 +10,9 @@ var PORT = process.env.PORT || 3000;
 // var db = require("./models");
 var db = require("./models");
 
+// Make public a static folder
+app.use(express.static("public"));
+
 //Sets up Express-Handlebars
 var exphbs = require("express-handlebars");
 app.engine("handlebars",exphbs({defaultLayout:"main"}));
@@ -21,8 +24,7 @@ app.use(logger("dev"));
 // Parse request body as JSON
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-// Make public a static folder
-app.use(express.static("public"));
+
 
 // Connect to the Mongo DB
 mongoose.connect("mongodb://localhost/newsdb", { useNewUrlParser: true });

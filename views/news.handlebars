@@ -1,0 +1,96 @@
+<nav class="nav-wraper sticky-top bg-dark" >      
+        <div class="nav-container ">                
+            <a href="#" class="sidenav-trigger" data-target="slide-out" >
+                <i class="material-icons">menu</i>
+            </a> 
+            
+            <div class=" row hide-on-med-and-down   table-of-contents">   
+                <div class="header-logo title justify-content-left" >
+                    <p class="logo">MONGO SCRAPER</p>                        
+                </div>   
+                <div class="header-nav">
+                    <ul class="justify-content-right" >           
+                        <li><i class="fa fa-get-pocket" aria-hidden="true"><a href="#skills">Scrape News</a></i></li>
+                        <li><i class="fa fa-bookmark" aria-hidden="true"><a href="#skills">Saved News</a></i></li>
+                        <li><i class="fa fa-user" aria-hidden="true"><a href="#about">Profile</a></i></li>                    
+                        <li><i class="fa fa-sign-out" aria-hidden="true"><a href="#portfolio">Logout</a></i></li>
+                    
+                    </ul>
+                </div>
+            </div>  
+        </div>    
+</nav>  
+
+ <ul class="sidenav" id="slide-out" >    
+    <br>       
+    <li>              
+        <h4 class="text-blue">User</h4>
+    </li>
+   
+    <div class="divider"></div>
+    <li><i class="fa fa-user sidenav-list" aria-hidden="true"><a href="#about" class="waves-effect active">    Profile</a></i></li>
+    <li><i class="fa fa-get-pocket" aria-hidden="true"><a href="#">  Scrape News</a></i></li>
+    <li><i class="fa fa-bookmark" aria-hidden="true"><a href="#">   Saved News</a></i></li>
+    <li><i class="fa fa-sign-out" aria-hidden="true"><a href="#">   Logout</a></i></li>
+</ul>    
+<div class="body-container">
+    <div class="row">
+
+         <div class="container-fluid newsLogo justify-content-center">
+             <h1>MONGO SCRAPE</h1>
+             <br>
+             <h2>New York Times Edition</h2>
+         </div> 
+        
+    </div>
+    
+     
+
+    <div class="row">
+        <div >            
+            <ol class="list-group">
+                {{!-- {{newsData}} --}}
+                {{#each news}}
+                   <div class="card">
+                    <div class="card-header">
+                       {{headline}}                        
+                    </div>
+                    <div class="card-body"  value = {{_id}}>
+                        <p class="cardTitle">{{summary}}</p>
+                        <a href="{{ url }}">More Information: {{ url }}</a>
+                        <div class="btnGroup">
+                            <button type="button"  class="button">Article Notes</button>
+                            <button type="button"  class="button ">Save Article</button>
+                        </div> 
+                    </div>
+                    </div>
+                {{/each}}             
+               
+            </ol>
+        </div>
+    
+       
+    </div>
+  
+</div>    
+
+<div class="container">
+    <div class="modal" id="modal-info" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Information</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body modal-body-info">
+                
+            </div>
+            <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>        

@@ -43,7 +43,7 @@ module.exports = function (app, db){
           db.News.create(result)
             .then(function(dbNews) {
        
-                console.log(dbNews);
+                console.log(dbNews);             
             })
             .catch(function(err) {
               // If an error occurred, log it
@@ -54,9 +54,25 @@ module.exports = function (app, db){
       console.log("count",count);
     });
 
+
+   
     
   });
 
+  app.get("/news",function(req,res){
 
+    db.News.find({})  
+      .then(function(newsData){
+          console.log("news data",newsData);
+          var hbsObject = {
+            news: newsData
+          };
+          console.log(hbsObject);
+          res.render("news",hbsObject);
+      })   
+      .catch(function(err){
+          console.log("err",err);
+      })
+  }) 
 
 };

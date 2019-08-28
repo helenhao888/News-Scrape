@@ -10,7 +10,7 @@
                 </div>   
                 <div class="header-nav">
                     <ul class="justify-content-right" >           
-                        <li><i class="fa fa-get-pocket" aria-hidden="true"><a  class ="scrapeLi">Scrape News</a></i></li>
+                        <li><i class="fa fa-get-pocket" aria-hidden="true"><a href="#" class ="scrapeLi">Scrape News</a></i></li>
                         <li><i class="fa fa-bookmark" aria-hidden="true"><a href="#">Saved News</a></i></li>
                         <li><i class="fa fa-user" aria-hidden="true"><a href="#">Profile</a></i></li>                    
                         <li><i class="fa fa-sign-out" aria-hidden="true"><a href="#">Logout</a></i></li>
@@ -24,11 +24,12 @@
  <ul class="sidenav" id="slide-out" >    
     <br>       
     <li>              
-        <h4 class="text-blue">User</h4>
+        <h4 class="text-blue">News Scraper</h4>        
+        <p>Welcome {{userName}}</p>
     </li>
    
     <div class="divider"></div>
-    <li><i class="fa fa-user sidenav-list" aria-hidden="true"><a href="#" class="waves-effect active">    Profile</a></i></li>
+    <li><i class="fa fa-user sidenav-list" aria-hidden="true"><a href="#" class="profileLi">     Profile</a></i></li>
     <li><i class="fa fa-get-pocket" aria-hidden="true"><a href="#" class ="scrapeLi">  Scrape News</a></i></li>
     <li><i class="fa fa-bookmark" aria-hidden="true"><a href="#">   Saved News</a></i></li>
     <li><i class="fa fa-sign-out" aria-hidden="true"><a href="#">   Logout</a></i></li>
@@ -58,7 +59,7 @@
                     </div>
                     <div class="card-body"  value = {{_id}}>
                         <p class="cardTitle">{{summary}}</p>
-                        <a href="{{ url }}">More Information: {{ url }}</a>
+                        <a href="{{ url }}" target="_blank">More Information: {{ url }}</a>
                         <div class="btnGroup">
                             <button type="button"  class="button">Article Notes</button>
                             <button type="button"  class="button ">Save Article</button>

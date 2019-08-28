@@ -8,12 +8,10 @@ $(document).on("click",".scrapeLi",function(event){
     type: "POST",
     data: ""
   }).then(
-    function (response) {
-      //should recieve a response of success, if it works
+    function (response) {      
       console.log(response);
-      //reload news page
-      location.reload();
-    //   window.location.href = "/news";
+      //redirect to news page
+      window.location.href = "/news";
     }).
     fail(function(err){
       console.log("err",err);

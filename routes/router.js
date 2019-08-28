@@ -4,32 +4,30 @@ module.exports = function (app, db){
   var cheerio = require("cheerio");
 
   // a route to get info from ny times news website
-  app.get("/scrape",function(req,res){
+  app.post("/scrape",function(req,res){
 
-    var count = 0; 
+    let count = 0; 
+    const resultArr =[];
+    const result = {};
 
     // First, we grab the body of the html with axios
     axios.get("https://www.nytimes.com/").then(function(response){
       // Then, load that into cheerio and save it to $ for a shorthand selector
       var $ = cheerio.load(response.data);
 
-      //grab every h2 within an article tag
-      $("article a").each(function(i,element){    
-        console.log("i",i);
-        var result = {};
+      //grab every a within an article tag
+      $("article a").each(function(i,element){   
+       
         // Add the text and href of every link, and save them as properties of the result object
 
-        result.headline = $(this)
-        //   .siblings("div")
+        result.headline = $(this)       
           .children()
           .text();
         result.summary = $(this)
           .children("p")
           .text();
           
-        result.url = $(this)
-        //   .parent("a")
-          .attr("href");
+        result.url = $(this).attr("href");
 
         if ( ! result.url.includes("http"))  {  
           result.url = "https:/www.nytimes.com" + result.url;
@@ -37,42 +35,65 @@ module.exports = function (app, db){
 
         if(result.title !== "" && result.summary !== "" && result.link !==""){  
           count++;
-
-          console.log("result",result);
-          // Create a new news using the `result` object built from scraping
-          db.News.create(result)
-            .then(function(dbNews) {
-       
-                console.log(dbNews);             
-            })
-            .catch(function(err) {
-              // If an error occurred, log it
-                console.log(err);
-            });
+          let resultObj = {
+            headline: result.headline,
+            summary : result.summary,
+            url     : result.url
+          }
+        
+          resultArr.push(resultObj);
+        
         }
-      });
-      console.log("count",count);
-    });
-
-
-   
+          
+         
+         
+      }); //end of article grabbing
+      
     
-  });
+        // Create all new news using the resultArr object array built from scraping
+        db.News.create(resultArr)
+        .then(function(dbNews) {
+   
+            console.log("inserting", dbNews);  
+            let newsObject = {
+              news: dbNews
+            };
+            res.json(
+              { status: "success",
+                 data: newsObject}
+            )
+            // res.render("news",newsObject);           
+        })
+        .catch(function(err) {
+          
+          if( err.code !== 11000 ) {
+            console.log(err);
+          } else  {
+            console.log("err code",err.code);
+            //skip error 
+          }
+        }); //end of db catch
+   
+    }); //end of get  
+    
+  }); //end of post
 
   app.get("/news",function(req,res){
 
     db.News.find({})  
       .then(function(newsData){
-          console.log("news data",newsData);
-          var hbsObject = {
-            news: newsData
-          };
-          console.log(hbsObject);
-          res.render("news",hbsObject);
+        var hbsObject = {
+          news: newsData
+        };
+        console.log(hbsObject);
+        res.render("news",hbsObject);
       })   
       .catch(function(err){
-          console.log("err",err);
+        console.log("err",err);
       })
-  }) 
+  }); //end of get 
 
-};
+
+
+
+}; //end of export

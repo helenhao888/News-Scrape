@@ -1,5 +1,8 @@
 $(document).ready(function(){
 
+    //initialize modal
+    $(".modal").modal();
+
     // initialize materialized sidenav. after click, close the sidenav. 
     
     $('.sidenav').sidenav()

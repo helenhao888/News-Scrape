@@ -184,3 +184,12 @@ span{
   float:right;
 }
 
+.modal-content{
+  background-color:darkolivegreen;
+  color:white;
+}
+
+#modal-info{
+height:200px;
+}
+

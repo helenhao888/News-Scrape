@@ -1,7 +1,8 @@
 module.exports = function (app, db){
  
-  var axios = require("axios");
-  var cheerio = require("cheerio");
+  const axios = require("axios");
+  const cheerio = require("cheerio");
+  let newsObject
 
   // a route to get info from ny times news website
   app.post("/scrape",function(req,res){
@@ -49,27 +50,38 @@ module.exports = function (app, db){
          
       }); //end of article grabbing
       
-    
+       
         // Create all new news using the resultArr object array built from scraping
         db.News.create(resultArr)
         .then(function(dbNews) {
    
-            console.log("inserting", dbNews);  
-            let newsObject = {
+            console.log("inserting", dbNews.length);  
+            newsObject = {
+              count: count,
               news: dbNews
             };
             res.json(
-              { status: "success",
-                 data: newsObject}
+              { status: "success",                
+                data: newsObject}
             )
-            // res.render("news",newsObject);           
+            // res.render("news",newsObject);      
+           
         })
         .catch(function(err) {
           
           if( err.code !== 11000 ) {
             console.log(err);
           } else  {
+            console.log("err ",err);
             console.log("err code",err.code);
+            newsObject = {
+              count: count,
+              news: ""
+            };
+            res.json(
+              { status: "success",                
+                data: newsObject}
+            )
             //skip error 
           }
         }); //end of db catch
@@ -85,7 +97,7 @@ module.exports = function (app, db){
         var hbsObject = {
           news: newsData
         };
-        console.log(hbsObject);
+        // console.log(hbsObject);
         res.render("news",hbsObject);
       })   
       .catch(function(err){

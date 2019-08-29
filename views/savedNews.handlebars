@@ -10,8 +10,8 @@
                 </div>   
                 <div class="header-nav">
                     <ul class="justify-content-right" >           
-                        <li><i class="fa fa-get-pocket" aria-hidden="true"><a href="#" class ="scrapeNews">Scrape News</a></i></li>
-                        <li><i class="fa fa-bookmark" aria-hidden="true"><a href="/savednews" class="savedNews">Saved News</a></i></li>
+                        {{!-- <li><i class="fa fa-get-pocket" aria-hidden="true"><a href="#" class ="scrapeLi">Scrape News</a></i></li> --}}
+                        <li><i class="fa fa-bookmark" aria-hidden="true"><a href="/savednews">Saved News</a></i></li>
                         <li><i class="fa fa-user" aria-hidden="true"><a href="#">Profile</a></i></li>                    
                         <li><i class="fa fa-sign-out" aria-hidden="true"><a href="#">Logout</a></i></li>
                     
@@ -30,8 +30,8 @@
    
     <div class="divider"></div>
     <li><i class="fa fa-user sidenav-list" aria-hidden="true"><a href="#" class="profileLi">     Profile</a></i></li>
-    <li><i class="fa fa-get-pocket" aria-hidden="true"><a href="#" class ="scrapeNews">  Scrape News</a></i></li>
-    <li><i class="fa fa-bookmark" aria-hidden="true"><a href="/savednews" class="savedNews">   Saved News</a></i></li>
+    {{!-- <li><i class="fa fa-get-pocket" aria-hidden="true"><a href="#" class ="scrapeLi">  Scrape News</a></i></li> --}}
+    <li><i class="fa fa-bookmark" aria-hidden="true"><a href="/savednews">   Saved News</a></i></li>
     <li><i class="fa fa-sign-out" aria-hidden="true"><a href="#">   Logout</a></i></li>
 </ul>    
 <div class="body-container">
@@ -39,9 +39,9 @@
     <div class="row">
 
          <div class="container-fluid newsLogo justify-content-center">
-             <h1>MONGO SCRAPE</h1>
+             <h1>SAVED ARTICLES</h1>
              <br>
-             <h2>New York Times Edition</h2>
+             <h2>You Saved Articles</h2>
          </div> 
         
     </div>
@@ -49,7 +49,7 @@
     <div class="row">
         <div >            
             <ol class="list-group">
-                {{!-- {{newsData}} --}}
+                
                 {{#each news}}
                    <div class="card">
                     <div class="card-header">
@@ -58,8 +58,10 @@
                     <div class="card-body"  value = {{_id}}>
                         <p class="cardTitle">{{summary}}</p>
                         <a href="{{ url }}" target="_blank">More Information: {{ url }}</a>
-                        <button type="button"  class="button saveBtn" value = {{_id}}>Save Article</button>
-                        
+                        <div class="btnGroup">
+                            <button type="button"  class="button noteBtn">Article Notes</button>
+                            <button type="button"  class="button ">Unsave Article</button>
+                        </div> 
                     </div>
                     </div>
                 {{/each}}             
@@ -72,7 +74,7 @@
   
 </div>    
 
-<div id="modal-info"  class="modal">
+{{!-- <div id="modal-info"  class="modal">
     <div class="modal-content">
       <h4>Information</h4>
       <p></p>
@@ -80,4 +82,4 @@
     <div class="modal-footer">
       <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
     </div>
-  </div>
+  </div> --}}

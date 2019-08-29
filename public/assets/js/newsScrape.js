@@ -1,7 +1,7 @@
 
 
 
-$(document).on("click",".scrapeLi",function(event){  
+$(document).on("click",".scrapeNews",function(event){  
   event.preventDefault();
   let displayText;
 
@@ -22,17 +22,12 @@ $(document).on("click",".scrapeLi",function(event){
           displayText = "Added "+response.data.count+" new articles !";
         }
       
-        $(".modal-content p").text(text);    
+        $(".modal-content p").text(displayText);    
         $("#modal-info").modal("open");        
       }
       
     });
 
-    // $.post("/scrape",reqData,function(data){
-    //     console.log("return",data);
-    //     // location.reload();
-    //     window.location.href("/news");
-    // })
 });
 
 
@@ -42,3 +37,35 @@ $(document).on("click",".modal-close",function(event){
   window.location.href = "/news" ;
 
 });
+
+$(".saveBtn").on("click", function(event){
+
+    event.preventDefault();
+    console.log("click save btn", $(this));
+    // console.log(" savebtn",$(".saveBtn"));
+    //get this article's id
+    let id=$(this).val();
+    
+    console.log("id",id);
+    // $.post("/saveNews/"+id,data=>{
+    $.ajax({
+        method: "POST",
+        url: "/saveNews/"+id,
+        data: ""
+    })
+    // With that done
+    .then(function(data) {
+        console.log("data",data);
+    });
+})
+
+   
+// $(document).on("click",".noteBtn",function(event) {  
+
+//     $.post("/",reqData,function(data){
+//         console.log("return",data);
+//         // location.reload();
+//         window.location.href("/news");
+//     })
+
+// })    

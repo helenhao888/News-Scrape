@@ -37,6 +37,9 @@ body{
     position: relative;
 }
 
+.body-container{
+   margin:20px;
+}
 
 .hide-on-med-and-down li{
 
@@ -178,9 +181,10 @@ span{
   
 .btnGroup button {
   margin: 10px;
+  float: right;
 }
 
-.btnGroup {
+.saveBtn {
   float:right;
 }
 

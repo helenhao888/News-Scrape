@@ -27,6 +27,7 @@ app.use(express.json());
 
 
 // Connect to the Mongo DB
+mongoose.set("useFindAndModify", false);
 mongoose.connect("mongodb://localhost/newsdb", { useNewUrlParser: true });
 
 // route

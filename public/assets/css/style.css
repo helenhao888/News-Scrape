@@ -184,14 +184,14 @@ span{
   float: right;
 }
 
-.saveBtn ,.delNoteBtn,.fa-trash,#deleteId{
+.saveBtn ,.fa-trash,.deleteLink{
   float:right;
 }
 
 .fa-trash{
   margin-left:10px;
 }
-#deleteId{
+.deleteLink{
   margin-right:10px;
 }
 

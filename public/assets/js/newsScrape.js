@@ -89,25 +89,34 @@ $(".noteBtn").on("click", function(event){
     let newsHeader = $("#modal-note h4").text();
     $("#modal-note h4").text(newsHeader + id);
     $("#saveNote").val(id);
-    $("#modal-note").modal("open");    
+    // $("#modal-note").modal("open");  
+    getNotes(id);  
+   
+})
+
+function getNotes(id){
+//use news id to get all the notes associated with this news
+    $("#noteList").empty();
     $.ajax({
         method: "GET",
         url: "/notes/"+id,
         data: ""
     })
-    // With that done
     .then(function(response) {
         
         if(response.status === "success"){
             console.log("success",response.data);
             for ( let i=0;i<response.data.notes.length;i++){
-                let note = response.data.notes[i];               
-                var card =$("<div>").addClass("card");
+                let note = response.data.notes[i];           
+                console.log("id",id);
+                console.log("note id",note._id)    
+                var card =$("<div>").addClass("card").attr("data-id",id);
                 let cardHeader = $("<div>").addClass("card-header").text(note.title);
                 let cardBody = $("<div>").addClass("card-body").text(note.body);
-                let delLink = $("<a>").attr({"href":"#","id":"deleteId"}).text("Delete").val(note.id);
-               
-                let iTag = $("<i>").addClass("fa fa-trash").attr("aria-hidden","true").val(note.id);
+                let delLink = $("<a>").attr({"href":"#","data-news-id":id,"data-id":note._id})
+                              .addClass("deleteLink").text("Delete");
+                
+                let iTag = $("<i>").addClass("fa fa-trash").attr("aria-hidden","true").val(note._id);
                 $(delLink).append($(iTag));
                 $(cardBody).append(delLink);                
                 $(card).append($(cardHeader),$(cardBody))            
@@ -118,14 +127,15 @@ $(".noteBtn").on("click", function(event){
         }
          
     });
-})
+}
+
 
 $("#saveNote").on("click",function(event){
 
     //validate input title and body
     let title = $("#titleinput").val();
     let body = $("#bodyinput").val();
-    let id = $("#saveNote").val();
+    let id = $("#saveNote").val();   
 
     if( title !== "" &&  body !== "" && id !== ""){
         let dataInput ={
@@ -140,8 +150,13 @@ $("#saveNote").on("click",function(event){
             url: "/addNotes/"+id,
             data: dataInput
         })
-        .then(function(data) {
-            console.log("data",data);
+        .then(function(response) {
+
+            if(response.status === "success"){
+               $("#titleinput").val("");
+               $("#bodyinput").val("");
+               getNotes(id);
+            }       
             
         });
 
@@ -150,4 +165,29 @@ $("#saveNote").on("click",function(event){
         //add modal info here
     }
 
+})
+
+
+$(document).on("click",".deleteLink",function(event){
+
+    event.preventDefault();
+    //get note id
+    let delId = $(this).attr("data-id");
+    let newsId = $(this).attr("data-news-id");
+    console.log("delid",delId);
+    // console.log("card",$(this).parents("card"))
+    $.ajax({
+        method: "DELETE",
+        url: "/deleteNotes/"+delId,
+        data: ""
+    })
+    .then(function(response) {
+
+        if(response.status === "success"){
+           //get news id
+           console.log("newid",newsId);
+           getNotes(newsId);
+        }       
+        
+    });
 })

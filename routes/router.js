@@ -230,8 +230,10 @@ app.post("/addNotes/:id", function(req, res) {
        db.News.findOneAndUpdate({ _id: req.params.id }, { "$push":{ notes: dbNote._id }}, { new: true })
        .then(function(dbNews) {
         console.log("after push note dbnews",dbNews);
-        // If we were able to successfully update an Article, send it back to the client
-        res.json(dbNote);
+        // If  successfully update an Article, send it back to the client
+        res.json({
+          status: "success",
+          data: dbNote});
       })
       .catch(function(err){
         console.log("update news err",err);
@@ -239,7 +241,7 @@ app.post("/addNotes/:id", function(req, res) {
     })   
     .catch(function(err) {
       // If an error occurred, send it to the client
-      res.json(err);
+      res.json("create note err",err);
     });
 });
 
@@ -262,6 +264,19 @@ app.get("/notes/:id",(req,res) =>{
     })     
    
  
-})
+});
+
+
+app.delete("/deleteNotes/:id",(req,res) =>{
+
+  db.Note.remove({_id:req.params.id})
+  .then( dbNote =>{
+     console.log("dbNote",dbNote);
+     res.json({
+      status: "success",
+      data: dbNote});
+  })
+
+});
 
 }; //end of export

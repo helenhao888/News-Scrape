@@ -19,11 +19,18 @@ var NewsSchema = new Schema ({
     type: Boolean,
     required: true,
     default : false
-  },
-  note:{
-    type: Schema.Types.ObjectId,
-    ref: "Note"
-  }
+  }, 
+  // `notes` is an array that stores ObjectIds
+  // The ref property links these ObjectIds to the Note model
+  // This allows  to populate the News with any associated Notes
+  notes: [
+    {
+      // Store ObjectIds in the array
+      type: Schema.Types.ObjectId,
+      // The ObjectIds will refer to the ids in the Note model
+      ref: "Note"
+    }
+  ]
 });
 
 var News = mongoose.model("News",NewsSchema);

@@ -179,14 +179,23 @@ span{
   transform: translateY(4px);
 }
   
-.btnGroup button {
+.btnGroup button ,.notesGroup button{
   margin: 10px;
   float: right;
 }
 
-.saveBtn {
+.saveBtn ,.delNoteBtn,.fa-trash,#deleteId{
   float:right;
 }
+
+.fa-trash{
+  margin-left:10px;
+}
+#deleteId{
+  margin-right:10px;
+}
+
+
 
 .modal-content{
   background-color:darkolivegreen;
@@ -197,3 +206,15 @@ span{
 height:200px;
 }
 
+#titleinput{
+  background: wheat;
+  height:30px;
+}
+
+#bodyinput{
+  background: wheat;
+}
+
+.notesGroup{
+  margin:20px;
+}

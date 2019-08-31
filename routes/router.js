@@ -93,6 +93,7 @@ module.exports = function (app, db){
 function createNewsDb(resultArr,req,res){
        
   // Create all new news using the resultArr object array built from scraping
+  let errCount = 0;
 
   db.News.create(resultArr)
   .then(function(dbNews) {
@@ -121,6 +122,8 @@ function createNewsDb(resultArr,req,res){
       //skip duplicate key error 
       console.log("err ",err);
       console.log("err code",err.code);
+      errCount ++;
+      console.log("errcount",errCount);
       newsObject = {
         //question can't catch exact inserted number 
         count: 0,
@@ -154,7 +157,7 @@ function createNewsDb(resultArr,req,res){
 
 
 //save selected news 
-app.post("/saveNews/:id",(req,res) =>{
+app.put("/saveNews/:id",(req,res) =>{
 
   
   db.News.findOneAndUpdate({_id:req.params.id},{$set: {saved:true}}, { new: true })
@@ -178,11 +181,7 @@ app.post("/saveNews/:id",(req,res) =>{
 app.get("/savednews",(req,res) => {
 
     db.News.find({saved:true})
-      .then((dbNews) => {
-        // res.json({
-        //   status: "success",
-        //   data  : dbNews
-        // })
+      .then((dbNews) => {        
 
         let hbsNews = {
           news: dbNews
@@ -200,20 +199,44 @@ app.get("/savednews",(req,res) => {
       })
 })
 
+app.put("/unsavenews/:id",(req,res) => {
+ 
+  
+  db.News.findOneAndUpdate({_id:req.params.id},{$set: {saved:false}}, { new: true })
+    .then(dbNews =>{
+      
+      res.json(
+         { status: "success",                
+           data:   dbNews})      
+    })
+    .catch(err => {
+      console.log("update news document error",err);
+      res.json(
+        { status: "fail",                
+          data:   err.errmsg})
+    })
+})
+
+
 // Route for saving/updating an Article's associated Note
 app.post("/addNotes/:id", function(req, res) {
   // Create a new note and pass the req.body to the entry
-  db.Notes.create(req.body)
+  console.log("req.body",req.body);
+  db.Note.create(req.body)
     .then(function(dbNote) {
       // If a Note was created successfully, find one news with an `_id` equal to `req.params.id`. 
       //Update the news to be associated with the new Note
       // { new: true } tells the query that we want it to return the updated 
-       return db.News.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
-    })
-    .then(function(dbNews) {
-      // If we were able to successfully update an Article, send it back to the client
-      res.json(dbNews);
-    })
+       db.News.findOneAndUpdate({ _id: req.params.id }, { "$push":{ notes: dbNote._id }}, { new: true })
+       .then(function(dbNews) {
+        console.log("after push note dbnews",dbNews);
+        // If we were able to successfully update an Article, send it back to the client
+        res.json(dbNote);
+      })
+      .catch(function(err){
+        console.log("update news err",err);
+      })
+    })   
     .catch(function(err) {
       // If an error occurred, send it to the client
       res.json(err);
@@ -222,7 +245,23 @@ app.post("/addNotes/:id", function(req, res) {
 
 app.get("/notes/:id",(req,res) =>{
 
-  db.Notes.find({})
+  console.log("get notes id ",req.params.id);
+
+  db.News.findOne({ _id: req.params.id })
+    .populate("notes")
+    .then( dbNews =>{
+       console.log("dbnews",dbNews);
+       
+      res.json({
+        status: "success",
+        data: dbNews});
+    })
+    .catch( err =>{
+      console.log("read news err",err);
+      res.json(err);
+    })     
+   
+ 
 })
 
 }; //end of export

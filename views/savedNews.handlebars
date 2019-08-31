@@ -59,8 +59,8 @@
                         <p class="cardTitle">{{summary}}</p>
                         <a href="{{ url }}" target="_blank">More Information: {{ url }}</a>
                         <div class="btnGroup">
-                            <button type="button"  class="button noteBtn">Article Notes</button>
-                            <button type="button"  class="button ">Unsave Article</button>
+                            <button type="button"  class="button noteBtn" value = {{_id}}>Article Notes</button>
+                            <button type="button"  class="button unsaveBtn" value = {{_id}}>Unsave Article</button>
                         </div> 
                     </div>
                     </div>
@@ -74,12 +74,23 @@
   
 </div>    
 
-{{!-- <div id="modal-info"  class="modal">
+<div id="modal-note"  class="modal">
     <div class="modal-content">
-      <h4>Information</h4>
-      <p></p>
+      <h4>Notes for article : </h4>
+          <div id=noteList>            
+            {{!-- <ol class="list-group">                         
+               
+            </ol> --}}
+         </div>
+
+      <div class="notesGroup">        
+        <input id='titleinput' placeholder="Note Title" name='title' >
+        <textarea id='bodyinput' name='body' placeholder="Note Body"></textarea>
+        <p id="inputMsg"></p>
+        <button class="button" id='saveNote'>Save Note</button>
+      </div> 
     </div>
     <div class="modal-footer">
       <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
     </div>
-  </div> --}}
+  </div>

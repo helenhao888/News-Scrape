@@ -10,7 +10,7 @@
                 </div>   
                 <div class="header-nav">
                     <ul class="justify-content-right" >           
-                        {{!-- <li><i class="fa fa-get-pocket" aria-hidden="true"><a href="#" class ="scrapeLi">Scrape News</a></i></li> --}}
+                        <li><i class="fa fa-home" aria-hidden="true"><a href="/" >  Home</a></i></li>
                         <li><i class="fa fa-bookmark" aria-hidden="true"><a href="/savednews">Saved News</a></i></li>
                         <li><i class="fa fa-user" aria-hidden="true"><a href="#">Profile</a></i></li>                    
                         <li><i class="fa fa-sign-out" aria-hidden="true"><a href="#">Logout</a></i></li>
@@ -30,7 +30,7 @@
    
     <div class="divider"></div>
     <li><i class="fa fa-user sidenav-list" aria-hidden="true"><a href="#" class="profileLi">     Profile</a></i></li>
-    {{!-- <li><i class="fa fa-get-pocket" aria-hidden="true"><a href="#" class ="scrapeLi">  Scrape News</a></i></li> --}}
+    <li><i class="fa fa-home" aria-hidden="true"><a href="/" >  Home</a></i></li>
     <li><i class="fa fa-bookmark" aria-hidden="true"><a href="/savednews">   Saved News</a></i></li>
     <li><i class="fa fa-sign-out" aria-hidden="true"><a href="#">   Logout</a></i></li>
 </ul>    
@@ -80,7 +80,8 @@
          <div id=noteList> 
          </div>
 
-      <div class="notesGroup">        
+      <div class="notesGroup">    
+        <p class="newNote">New Note</p>      
         <input id='titleinput' placeholder="Note Title" name='title' >
         <textarea id='bodyinput' name='body' placeholder="Note Body"></textarea>
         <p id="inputMsg"></p>

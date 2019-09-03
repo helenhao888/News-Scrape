@@ -146,6 +146,7 @@ span{
    font-size: 22px;
    color: purple;
 }
+
   
 .cardTitle {
   font-size  : 18px;
@@ -195,6 +196,10 @@ span{
   margin-right:10px;
 }
 
+.notesGroup{
+  margin: 0px;
+  background: lightgrey;
+}
 
 
 .modal-content{
@@ -216,5 +221,12 @@ height:200px;
 }
 
 .notesGroup{
-  margin:20px;
+  margin:0px;
+  background: #999;
+}
+
+.newNote{
+  font-size: 22px;
+  color: purple;
+  margin:5px;
 }

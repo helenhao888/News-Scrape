@@ -44,38 +44,6 @@ module.exports = function (app, db){
           }
         
           resultArr.push(resultObj);
-
-          // db.News.create(result)
-          // .then(function(dbNews) {
-     
-          //     count++;
-          //     newsObject = {
-          //       count: count,
-          //       news: dbNews
-          //     };
-          //     res.json(
-          //       { status: "success",                
-          //         data: newsObject}
-          //     )                 
-             
-          // })
-          // .catch(function(err) {
-          //   //skip duplicate key error 
-          //   if( err.code !== 11000 ) {
-              
-          //     console.log("err ",err);
-          //     console.log("err code",err.code);
-          //     // newsObject = {
-          //     //   count: count,
-          //     //   news: ""
-          //     // };
-          //     res.json(
-          //       { status: "fail",                
-          //         data: err.errmsg}
-          //     )
-              
-          //   }
-          // }); //end of db catch
         
         
         }
@@ -98,8 +66,7 @@ function createNewsDb(resultArr,req,res){
   db.News.create(resultArr)
   .then(function(dbNews) {
 
-      console.log("inserting", dbNews.length);  
-      console.log("db News",dbNews);
+      
       newsObject = {
         count:  dbNews.length,
         news: dbNews
@@ -119,11 +86,9 @@ function createNewsDb(resultArr,req,res){
           data: err.errmsg});
 
     } else  {
-      //skip duplicate key error 
-      console.log("err ",err);
+      //skip duplicate key error      
       console.log("err code",err.code);
-      errCount ++;
-      console.log("errcount",errCount);
+      errCount ++;      
       newsObject = {
         //question can't catch exact inserted number 
         count: 0,
@@ -140,14 +105,14 @@ function createNewsDb(resultArr,req,res){
   }
 
 
-  app.get("/news",function(req,res){
-
+  // app.get("/news",function(req,res){
+app.get("/",function(req,res){
     db.News.find({})  
       .then(function(newsData){
         var hbsObject = {
           news: newsData
         };
-        // console.log(hbsObject);
+       
         res.render("news",hbsObject);
       })   
       .catch(function(err){
@@ -186,7 +151,7 @@ app.get("/savednews",(req,res) => {
         let hbsNews = {
           news: dbNews
           };
-          // console.log(hbsObject);
+         
         res.render("savedNews",hbsNews);  
 
       })
@@ -221,7 +186,7 @@ app.put("/unsavenews/:id",(req,res) => {
 // Route for saving/updating an Article's associated Note
 app.post("/addNotes/:id", function(req, res) {
   // Create a new note and pass the req.body to the entry
-  console.log("req.body",req.body);
+  
   db.Note.create(req.body)
     .then(function(dbNote) {
       // If a Note was created successfully, find one news with an `_id` equal to `req.params.id`. 
@@ -229,7 +194,7 @@ app.post("/addNotes/:id", function(req, res) {
       // { new: true } tells the query that we want it to return the updated 
        db.News.findOneAndUpdate({ _id: req.params.id }, { "$push":{ notes: dbNote._id }}, { new: true })
        .then(function(dbNews) {
-        console.log("after push note dbnews",dbNews);
+       
         // If  successfully update an Article, send it back to the client
         res.json({
           status: "success",
@@ -246,13 +211,11 @@ app.post("/addNotes/:id", function(req, res) {
 });
 
 app.get("/notes/:id",(req,res) =>{
-
-  console.log("get notes id ",req.params.id);
+  
 
   db.News.findOne({ _id: req.params.id })
     .populate("notes")
-    .then( dbNews =>{
-       console.log("dbnews",dbNews);
+    .then( dbNews =>{     
        
       res.json({
         status: "success",
@@ -271,7 +234,7 @@ app.delete("/deleteNotes/:id",(req,res) =>{
 
   db.Note.remove({_id:req.params.id})
   .then( dbNote =>{
-     console.log("dbNote",dbNote);
+     
      res.json({
       status: "success",
       data: dbNote});

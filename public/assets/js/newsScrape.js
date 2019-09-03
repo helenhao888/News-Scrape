@@ -31,11 +31,11 @@ $(document).on("click",".scrapeNews",function(event){
 });
 
 
-$(document).on("click",".modal-close",function(event){ 
+$(document).on("click",".news-modal-close",function(event){ 
  
   //redirect to news page
-  window.location.href = "/news" ;
-
+//   window.location.href = "/news" ;
+    window.location.href = "/";
 });
 
 $(".saveBtn").on("click", function(event){
@@ -136,6 +136,7 @@ $("#saveNote").on("click",function(event){
     let title = $("#titleinput").val();
     let body = $("#bodyinput").val();
     let id = $("#saveNote").val();   
+    $("#inputMsg").empty();
 
     if( title !== "" &&  body !== "" && id !== ""){
         let dataInput ={
@@ -156,13 +157,17 @@ $("#saveNote").on("click",function(event){
                $("#titleinput").val("");
                $("#bodyinput").val("");
                getNotes(id);
+            }else{
+               $("#inputMsg").append($("<p>").text(response.data));
             }       
             
         });
 
     }else{
+   
         console.log("input empty err");
-        //add modal info here
+        //add err message to modal info
+        $("#inputMsg").append($("<p>").text("Please input note title and body!"));
     }
 
 })
@@ -175,7 +180,6 @@ $(document).on("click",".deleteLink",function(event){
     let delId = $(this).attr("data-id");
     let newsId = $(this).attr("data-news-id");
     console.log("delid",delId);
-    // console.log("card",$(this).parents("card"))
     $.ajax({
         method: "DELETE",
         url: "/deleteNotes/"+delId,
@@ -185,7 +189,6 @@ $(document).on("click",".deleteLink",function(event){
 
         if(response.status === "success"){
            //get news id
-           console.log("newid",newsId);
            getNotes(newsId);
         }       
         

@@ -1,10 +1,22 @@
 # News-Scrape
 
-# News-Scrape
 
 ### Overview
+The news scrape is a web app that gets the latest news from NY times website and lets users view and leave comments on the news. It accomplishes the following:
 
-* E
+  1. Whenever a user visits this site, the app should scrape stories from the latest news from the NY times website and display them for the user. Each scraped article is saved to the application database. The app scrapes and displays the following information for each article:
+
+     * Headline - the title of the article
+
+     * Summary - a short summary of the article
+
+     * URL - the url to the original article (user can click this link to see the whole story)
+
+  2. User can select articles and save them. All the saved articles can be displayed on the saved news page. 
+     User also can unsave an article later.
+     
+  3. Users can should also be able to leave comments on the articles displayed and revisit them later. The comments are saved to the database as well and associated with their articles. Users also are able to delete comments left on articles. All stored comments are visible to every user.
+
 
 ### App Live Link
 
@@ -30,6 +42,8 @@ https://github.com/helenhao888/News-Scrape.git
     HTML
     CSS
     Materialized CSS
+    cheerio
+    axios
     HeroKu/GitHub
 
 ### Screenshots

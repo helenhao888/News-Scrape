@@ -61,12 +61,12 @@ module.exports = function (app, db){
 function createNewsDb(resultArr,req,res){
        
   // Create all new news using the resultArr object array built from scraping
-  let errCount = 0;
+  
 
-  db.News.create(resultArr)
+  db.News.insertMany(resultArr)
   .then(function(dbNews) {
 
-      
+     console.log("dbnews inserted".dbNews); 
       newsObject = {
         count:  dbNews.length,
         news: dbNews
@@ -78,6 +78,7 @@ function createNewsDb(resultArr,req,res){
      
   })
   .catch(function(err) {
+    // console.log("inserted count",insertedCount);
     
     if( err.code !== 11000 ) {
       console.log(err);
@@ -86,12 +87,14 @@ function createNewsDb(resultArr,req,res){
           data: err.errmsg});
 
     } else  {
-      //skip duplicate key error      
-      console.log("err code",err.code);
-      errCount ++;      
+      //skip duplicate key error  
+      
+      // console.log("err code",err.result);
+      // console.log("result num inserted",err.result.nInserted)     
+         
       newsObject = {
         //question can't catch exact inserted number 
-        count: 0,
+        count: err.result.nInserted,
         news: ""
       };
       res.json(
@@ -106,7 +109,7 @@ function createNewsDb(resultArr,req,res){
 
 
   // app.get("/news",function(req,res){
-app.get("/",function(req,res){
+app.get("/news",function(req,res){
     db.News.find({})  
       .then(function(newsData){
         var hbsObject = {

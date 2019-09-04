@@ -238,12 +238,37 @@ app.get("/notes/:id",(req,res) =>{
 //use note id to delete a note
 app.delete("/deleteNotes/:id",(req,res) =>{
 
-  db.Note.remove({_id:req.params.id})
+  db.Note.deleteOne({_id:req.params.id})
   .then( dbNote =>{
      
      res.json({
       status: "success",
       data: dbNote});
+  })
+  .catch( (err) => {
+    res.json({
+      status:"fail",
+      err: err.message
+    })
+  })
+});
+
+
+//clear all articles
+app.delete("/clearNews",(req,res) =>{
+
+  db.News.deleteMany({})
+  .then( dbNews =>{
+     
+     res.json({
+      status: "success",
+      data: dbNews});
+  })
+  .catch( (err) => {
+      res.json({
+        status:"fail",
+        data: err.message
+      })
   })
 
 });

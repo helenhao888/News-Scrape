@@ -162,11 +162,11 @@ $(document).ready(function(){
             .then(function(response) {
 
                 if(response.status === "success"){
-                $("#titleinput").val("");
-                $("#bodyinput").val("");
-                getNotes(id);
-                }else{
-                $("#inputMsg").append($("<p>").text(response.data));
+                    $("#titleinput").val("");
+                    $("#bodyinput").val("");
+                    getNotes(id);
+                } else{
+                    $("#inputMsg").append($("<p>").text(response.data));
                 }       
                 
             });
@@ -203,5 +203,26 @@ $(document).ready(function(){
         });
     });
 
+    $(document).on("click",".clearNews",function(event){
+
+        event.preventDefault();
+        
+       console.log("clear click");
+
+        $.ajax({
+            method: "DELETE",
+            url: "/clearNews/",
+            data: ""
+        })
+        .then(function(response) {
+            console.log("delete res",response)
+            if(response.status === "success"){
+               window.location.href="/";
+            }else{
+               console.log("clear article err",response.data);
+            }     
+            
+        });
+    });
 
 })

@@ -12,17 +12,16 @@ The news scrape is a web app that gets the latest news from NY times website and
 
      * URL - the url to the original article (user can click this link to see the whole story)
 
-  2. User can select articles and save them. All the saved articles can be displayed on the saved news page. 
+  2. User can delete all articles by clicking clear News button.
+
+  3. User can select articles and save them. All the saved articles can be displayed on the saved news page. 
      User also can unsave an article later.
 
-  3. Users can should also be able to leave comments on the articles displayed and revisit them later. The comments are saved to the database as well and associated with their articles. Users also are able to delete comments left on articles. All stored comments are visible to every user.
+  4. Users can should also be able to leave comments on the articles displayed and revisit them later. The comments are saved to the database as well and associated with their articles. Users also are able to delete comments left on articles. All stored comments are visible to every user.
 
 
 ### App Live Link
-
-
-### APP HEROKU GIT LINK
-
+https://sleepy-brushlands-80835.herokuapp.com/
 
 ### App GitHub Link
 https://github.com/helenhao888/News-Scrape.git
@@ -82,7 +81,9 @@ https://github.com/helenhao888/News-Scrape.git
    * Validate input fields. 
    ![input validation](public/assets/img/inputValidation.png)
   
-
+8. Clear News
+   * After clearing news
+   ![clear news](public/assets/img/clearedNews.png)
 #### Directory structure
 ```
 │ 

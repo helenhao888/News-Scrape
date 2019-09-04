@@ -48,38 +48,38 @@ https://github.com/helenhao888/News-Scrape.git
 
 ### Screenshots
 1. Responsive Design
-    Large Screen.
+   * Large Screen.
    ![large screen](public/assets/img/largeScreenNews.png)
-    Small Screen.
+   * Small Screen.
    ![small screen](public/assets/img/smallScreenNews.png)
 2. Scrape News
-   When user clicks scarpe news button,it gets all the news from NY Times website and stores them in database.Then Display them on the screen.
+   * When user clicks scarpe news button,it gets all the news from NY Times website and stores them in database.Then Display them on the screen.
    ![scrape news](public/assets/img/beforeScrapeNews.png)
    ![scrape news](public/assets/img/scrapeNews.png)
    ![scrape news](public/assets/img/afterScrapeNews.png)
 
 3. Save Article
-   Save article.
+   * Save article.
    ![Save News](public/assets/img/saveArticle.png)
-   Saved article.
+   * Saved article.
    ![Save News](public/assets/img/savedArticle.png)
 4. UnSave Article
-    Unsave article
+   * Unsave article
    ![UnSave News](public/assets/img/unsaveAritcle.png)   
 
 5. Add Notes
-    Add a note for an article.
+   * Add a note for an article.
    ![Add Note](public/assets/img/addNote.png)   
    Add another note for an article.
    ![Add Note](public/assets/img/addAnotherNote.png)   
 
 6. Delete Note
-    Before deleting note
+   * Before deleting note
    ![Delete Note](public/assets/img/beforeDeleteNote.png)
-    After deleting note
+   * After deleting note
    ![Delete Note](public/assets/img/afterDeleteNote.png)
 7. validation check 
-   Validate input fields. 
+   * Validate input fields. 
    ![input validation](public/assets/img/inputValidation.png)
   
 

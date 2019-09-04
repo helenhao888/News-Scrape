@@ -28,7 +28,10 @@ app.use(express.json());
 
 // Connect to the Mongo DB
 mongoose.set("useFindAndModify", false);
-mongoose.connect("mongodb://localhost/newsdb", { useNewUrlParser: true });
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
+// mongoose.connect("mongodb://localhost/newsdb", { useNewUrlParser: true });
 
 // route
 require("./routes/router.js")(app,db);

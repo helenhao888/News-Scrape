@@ -78,7 +78,6 @@ function createNewsDb(resultArr,req,res){
      
   })
   .catch(function(err) {
-    // console.log("inserted count",insertedCount);
     
     if( err.code !== 11000 ) {
       console.log(err);
@@ -87,13 +86,10 @@ function createNewsDb(resultArr,req,res){
           data: err.errmsg});
 
     } else  {
-      //skip duplicate key error  
-      
-      // console.log("err code",err.result);
-      // console.log("result num inserted",err.result.nInserted)     
+      //skip duplicate key error        
+      //err.result.nInserted is the successfully inserted number
          
       newsObject = {
-        //question can't catch exact inserted number 
         count: err.result.nInserted,
         news: ""
       };
@@ -108,8 +104,8 @@ function createNewsDb(resultArr,req,res){
   }
 
 
-  // app.get("/news",function(req,res){
-app.get("/news",function(req,res){
+  
+app.get("/",function(req,res){
     db.News.find({})  
       .then(function(newsData){
         var hbsObject = {
@@ -119,7 +115,9 @@ app.get("/news",function(req,res){
         res.render("news",hbsObject);
       })   
       .catch(function(err){
-        console.log("err",err);
+        res.json(
+          { status: "fail",                
+            data:   err.errmsg})
       })
   }); //end of get 
 
@@ -205,16 +203,19 @@ app.post("/addNotes/:id", function(req, res) {
       })
       .catch(function(err){
         console.log("update news err",err);
+        res.json({status:"fail",
+                  data: err.message  })
       })
     })   
     .catch(function(err) {
-      // If an error occurred, send it to the client
-      res.json("create note err",err);
+      // If an error occurred, send it to the client      
+      res.json({status:"fail",
+                data: err.message  })
     });
 });
 
-app.get("/notes/:id",(req,res) =>{
-  
+//use news id to get the notes under this news
+app.get("/notes/:id",(req,res) =>{  
 
   db.News.findOne({ _id: req.params.id })
     .populate("notes")
@@ -226,13 +227,15 @@ app.get("/notes/:id",(req,res) =>{
     })
     .catch( err =>{
       console.log("read news err",err);
-      res.json(err);
+      res.json({status:"fail",
+                data: err.message  })
     })     
    
  
 });
 
 
+//use note id to delete a note
 app.delete("/deleteNotes/:id",(req,res) =>{
 
   db.Note.remove({_id:req.params.id})
